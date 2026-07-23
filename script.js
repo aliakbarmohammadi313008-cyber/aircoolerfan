@@ -215,27 +215,7 @@ if (video && bigPlay && playBtn && muteBtn && fullBtn) {
  
 
   /* ---------- 8. Gallery lazy-load ---------- */
-  const lazyImgs = document.querySelectorAll('.lazy-img');
-  if ('IntersectionObserver' in window) {
-    const imgObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          const src = img.getAttribute('data-src');
-          if (src) img.src = src;
-          img.addEventListener('error', () => {
-            // Placeholder image not found: keep a graceful gradient background
-            img.style.opacity = '0';
-          }, { once: true });
-          imgObserver.unobserve(img);
-        }
-      });
-    }, { rootMargin: '150px' });
 
-    lazyImgs.forEach((img) => imgObserver.observe(img));
-  } else {
-    lazyImgs.forEach((img) => { img.src = img.getAttribute('data-src'); });
-  }
 
   /* ---------- 9. Ripple button effect ---------- */
   document.querySelectorAll('.btn--ripple').forEach((btn) => {
