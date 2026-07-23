@@ -189,11 +189,13 @@ if (video && bigPlay && playBtn && muteBtn && fullBtn) {
         timeEl.textContent = fmt(0) + ' / ' + fmt(video.duration);
     });
 
-    progressBar.addEventListener('click', function(e){
-        var rect = progressBar.getBoundingClientRect();
-        var pct = (e.clientX - rect.left) / rect.width;
-        video.currentTime = pct * video.duration;
-    });
+progressBar.addEventListener('click', function(e){
+    var rect = progressBar.getBoundingClientRect();
+    var pct = (rect.right - e.clientX) / rect.width;
+    pct = Math.max(0, Math.min(1, pct));
+    
+    video.currentTime = pct * video.duration;
+});
 
     muteBtn.addEventListener('click', function(){
         video.muted = !video.muted;
