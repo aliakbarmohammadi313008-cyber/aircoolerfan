@@ -191,11 +191,15 @@ if (video && bigPlay && playBtn && muteBtn && fullBtn) {
 
 progressBar.addEventListener('click', function(e){
     var rect = progressBar.getBoundingClientRect();
+    // در RTL فاصله از سمت راست نوار محاسبه می‌شود:
     var pct = (rect.right - e.clientX) / rect.width;
+    
+    // اطمینان از اینکه درصد بین 0 و 1 بماند
     pct = Math.max(0, Math.min(1, pct));
     
     video.currentTime = pct * video.duration;
 });
+
 
     muteBtn.addEventListener('click', function(){
         video.muted = !video.muted;
